@@ -1,0 +1,39 @@
+//! \brief Simple TLM bus model.
+/*!
+  A simple stub for a TLM bus model with one master and two slaves.
+*/
+
+#include "systemc.h"
+#include "top_simple.cpp"
+
+using namespace sc_core;
+using namespace sc_dt;
+using namespace std;
+
+int exit_status = 0; //global
+
+int sc_main (int argc, char* argv[])
+{
+  //!Direkte Instantiierung auf oberster Ebene; <Bus-Data-Type, FIFO-Type>
+  top<unsigned int, char> topx("IoT-Top");
+
+  //sc_clock clk {"clk", 1000000000, SC_NS};
+  
+  cout << "Simulation started: Time resolution: "
+       << sc_get_time_resolution() << endl;
+  //sc_set_time_resolution(1,SC_PS);
+
+ 
+
+  sc_start();
+
+  if(!sc_end_of_simulation_invoked())
+  {
+    cout << "Simulation stopped: " << endl;
+    sc_stop();
+  }
+
+  //sc_close_vcd_trace_file(Tf);
+  
+  return exit_status;
+}
